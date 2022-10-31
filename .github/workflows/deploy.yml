@@ -1,0 +1,22 @@
+name: Build and Deploy
+on: [push] // 推送代码触发脚本
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: vuepress-deploy
+      uses: jenkey2011/vuepress-deploy@master
+      env:
+        # github Token
+        ACCESS_TOKEN: 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 // github Token
+        # 仓库
+        TARGET_REPO: https://github.com/bestrivenfan/webslice.git  // 仓库
+        # 推送的分支名
+        TARGET_BRANCH: master    // build 之后推到的分支名
+        # 构建部署目标
+        BUILD_SCRIPT: npm && npm run src:build
+        BUILD_DIR: src/.vuepress/dist/     //build 之后的目录
+        CNAME: cxsw.webslice.cn
